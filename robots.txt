@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /en/admin.html
+Disallow: /api/
+Disallow: /data/
+Sitemap: https://ww-business-site.ww-business-site.workers.dev/sitemap.xml

@@ -1,0 +1,20 @@
+(() => {
+  const form = document.querySelector('#quote-form');
+  const total = document.querySelector('#quote-total');
+  if (!form || !total) return;
+  const english = document.documentElement.lang.startsWith('en');
+  const actions = document.createElement('div'); actions.className = 'page-actions quote-actions';
+  const copy = document.createElement('button'); copy.type = 'button'; copy.className = 'pill-link'; copy.textContent = english ? 'Copy estimate' : 'نسخ التقدير';
+  const save = document.createElement('button'); save.type = 'button'; save.className = 'pill-link secondary'; save.textContent = english ? 'Save estimate' : 'حفظ التقدير';
+  const printButton = document.createElement('button'); printButton.type = 'button'; printButton.className = 'pill-link secondary'; printButton.textContent = english ? 'Print / PDF' : 'طباعة / PDF';
+  const feedback = document.createElement('span'); feedback.setAttribute('role', 'status'); feedback.setAttribute('aria-live', 'polite');
+  actions.append(copy, save, printButton, feedback); total.after(actions);
+  const summary = () => `${form.elements.kind.selectedOptions[0].textContent}\n${english ? 'Quantity' : 'العدد'}: ${form.elements.quantity.value}\n${english ? 'Estimated total' : 'الإجمالي التقديري'}: ${total.textContent}\n${english ? 'Not a final quote; confirm scope and price in writing.' : 'هذا تقدير أولي وليس عرضًا نهائيًا؛ يؤكد النطاق والسعر كتابةً.'}`;
+  let managedPrices = null;
+  const recalcManaged = () => { if (!managedPrices) return; const map={'domain-sa-new':'domainSaNew','domain-global-new':'domainGlobalNew','domain-sa-renew':'domainSaRenew','domain-global-renew':'domainGlobalRenew','domain-sa-recovery':'domainSaRecovery','domain-sa-direct':'domainSaDirect','domain-global-transfer':'domainGlobalTransfer','domain-sa-transfer':'domainSaTransfer','email-google-starter':'googleStarter','email-google-standard':'googleStandard','email-google-plus':'googlePlus','email-ms-basic':'microsoftBasic','email-ms-standard':'microsoftStandard','email-ms-premium':'microsoftPremium','email-copilot':'microsoftCopilot',website:'websitePremium'};const price=managedPrices[map[form.elements.kind.value]];if(price!==undefined){const value=Number(price)*Number(form.elements.quantity.value||1);total.textContent=new Intl.NumberFormat(english?'en-US':'ar-SA').format(value)+(form.elements.kind.value.startsWith('email-')?(english?' SAR per year':' ر.س سنويًا'):(english?' SAR':' ر.س'));} };
+  copy.addEventListener('click', async () => { try { await navigator.clipboard.writeText(summary()); feedback.textContent = english ? 'Estimate copied.' : 'تم نسخ التقدير.'; } catch { feedback.textContent = english ? 'Clipboard access is unavailable.' : 'تعذر الوصول إلى الحافظة.'; } });
+  save.addEventListener('click', () => { const blob = new Blob([summary()], { type: 'text/plain;charset=utf-8' }); const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'ww-estimate.txt'; link.click(); URL.revokeObjectURL(link.href); });
+  printButton.addEventListener('click', () => print());
+  form.addEventListener('input', recalcManaged); form.addEventListener('change', recalcManaged);
+  window.addEventListener('ww-site-content', (event) => { managedPrices=event.detail.prices;recalcManaged(); });
+})();

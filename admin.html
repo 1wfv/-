@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#111315">
+  <title>لوحة الطلبات | WW</title>
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <main class="admin-shell">
+    <header class="admin-header">
+      <a class="admin-brand" href="/"><span class="admin-mark" aria-hidden="true"><svg viewBox="0 0 64 52"><path d="M4 13 10 39 17 22 24 39 31 13M33 13 39 39 46 22 53 39 60 13"/></svg></span><span><b>WW</b><small>لوحة الطلبات</small></span></a>
+      <div><a class="quiet-button" href="/en/admin.html" lang="en">English</a> <button class="quiet-button" id="logout-button" type="button" hidden>تسجيل الخروج</button></div>
+    </header>
+    <section class="login-panel" id="login-panel">
+      <span class="panel-kicker">مساحة خاصة</span>
+      <h1>مرحبًا بك</h1>
+      <p>سجّل الدخول للاطلاع على طلبات العملاء.</p>
+      <form id="login-form">
+        <label for="admin-password">كلمة مرور الإدارة</label>
+        <input id="admin-password" name="password" type="password" autocomplete="current-password" required>
+        <button class="primary-button" type="submit">دخول إلى الطلبات <span>←</span></button>
+      </form>
+      <p class="feedback" id="login-feedback" role="status" aria-live="polite"></p>
+    </section>
+    <section class="orders-panel" id="orders-panel" hidden>
+      <div class="orders-heading"><div><span class="panel-kicker">مساحة خاصة</span><h1>طلبات العملاء</h1><p>كل الطلبات المرسلة من نموذج الموقع محفوظة هنا.</p></div><button class="quiet-button" id="refresh-button" type="button">تحديث القائمة ↻</button></div>
+      <div class="orders-summary"><span>إجمالي الطلبات</span><strong id="orders-count">0</strong></div>
+      <p class="feedback" id="orders-feedback" role="status" aria-live="polite"></p>
+      <div class="orders-list" id="orders-list"></div>
+      <section class="content-editor"><div class="orders-heading"><div><span class="panel-kicker">إدارة المحتوى</span><h2>تحديث الأسعار والأسئلة والإعلان</h2><p>التعديلات المنشورة تظهر للعملاء في صفحات الأسعار والأسئلة والتحديثات.</p></div></div><form id="content-form"><h3>إعلان الموقع</h3><label><input name="announcementActive" type="checkbox"> نشر الإعلان</label><div class="content-columns"><label>عنوان الإعلان بالعربية<input name="announcementArTitle" maxlength="120"></label><label>نص الإعلان بالعربية<textarea name="announcementArBody" maxlength="1000"></textarea></label><label>Announcement title in English<input name="announcementEnTitle" maxlength="120"></label><label>Announcement text in English<textarea name="announcementEnBody" maxlength="1000"></textarea></label></div><h3>سؤال شائع مخصص</h3><div class="content-columns"><label>السؤال بالعربية<input name="faqArQuestion" maxlength="220"></label><label>الإجابة بالعربية<textarea name="faqArAnswer" maxlength="1000"></textarea></label><label>Question in English<input name="faqEnQuestion" maxlength="220"></label><label>Answer in English<textarea name="faqEnAnswer" maxlength="1000"></textarea></label></div><h3>الأسعار بالريال</h3><p class="content-help">تحدّث هذه القيم صفحة المنتجات والحاسبة. راجع الأسعار قبل النشر.</p><div class="price-editor" id="price-editor"></div><button class="primary-button" type="submit">حفظ ونشر المحتوى</button><p class="feedback" id="content-feedback" role="status" aria-live="polite"></p></form></section>
+    </section>
+  </main>
+</body>
+</html>

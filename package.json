@@ -1,0 +1,15 @@
+{
+  "name": "ww-business-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WW Arabic business website and private customer request dashboard",
+  "scripts": {
+    "start": "node server.js",
+    "sync:source": "node scripts/sync-source-bundle.js",
+    "publish:source": "node scripts/sync-source-bundle.js --publish",
+    "watch:source": "node scripts/sync-source-bundle.js --watch --publish"
+  },
+  "engines": {
+    "node": ">=20 <25"
+  }
+}
