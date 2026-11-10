@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "ww-business-site",
+  "name": "worker",
   "main": "cloudflare/worker.js",
   "compatibility_date": "2026-10-03",
   "workers_dev": true,
